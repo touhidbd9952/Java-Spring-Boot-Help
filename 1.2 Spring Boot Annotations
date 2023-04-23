@@ -12,6 +12,9 @@
     ////////Import Resource File/////////////////
     
         @ImportResource({"classpath:BeenConfig.xml"})
+    
+    ////////Cal function on distroy construction///////////
+        @PreDestroy
 
     ////////Request Responses/////////////////
 
