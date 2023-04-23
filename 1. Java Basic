@@ -1,1 +1,664 @@
 //Java Basic Over view
+
+//check java version
+--------------------------
+java -version
+
+//install java
+--------------------------
+https://www.oracle.com/technetwork/java/javase/overview/index.html
+
+//Main.java : every java application has a file "Main.java"
+--------------------------
+public class Main {
+  public static void main(String[] args) {
+    System.out.println("Hello World");
+  }
+}
+
+//compile code
+----------------------
+javac Main.java
+
+//run java
+----------------------
+java Main
+
+//Display Output
+------------------------
+System.out.println();
+System.out.println(3);
+
+//Comments
+-------------------------
+// This is a comment
+
+/* The code below will print the words Hello World
+to the screen, and it is amazing */
+
+//Variables
+--------------------------
+String name = "John";
+int myNum = 15;
+final int myNum = 15; //to overwrite existing values, use the final keyword
+int myNum = 5;
+float myFloatNum = 5.99f;
+char myLetter = 'D';
+boolean myBool = true;
+String myText = "Hello";
+String fullName = firstName + lastName;
+
+String[] cars;
+String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+cars.length
+int[] myNum = {10, 20, 30, 40};
+int[][] myNumbers = { {1, 2, 3, 4}, {5, 6, 7} };
+
+int x = 5, y = 6, z = 50;
+int myInt = (int) myDouble;
+name.length()
+txt.indexOf("J") //0
+firstName.concat(lastName)
+\n 	New Line 	
+\r 	Carriage Return 	
+\t 	Tab 	
+\b 	Backspace 	
+\f 	Form Feed
+
+//Math
+----------------------------
+Math.max(5, 10); //10
+Math.min(5, 10); //5
+Math.sqrt(64); //8
+Math.abs(-4.7); //4.7
+Math.random();
+
+
+//if(condition)
+----------------------------
+int time = 22;
+if (time < 10) {
+  System.out.println("Good morning.");
+} else if (time < 18) {
+  System.out.println("Good day.");
+} else {
+  System.out.println("Good evening.");
+}
+
+//short if
+----------------------------
+String result = (time < 18) ? "Good day." : "Good evening.";
+
+//Switch 
+---------------------------
+int day = 4;
+switch (day) {
+  case 6:
+    System.out.println("Today is Saturday");
+    break;
+  case 7:
+    System.out.println("Today is Sunday");
+    break;
+  default:
+    System.out.println("Looking forward to the Weekend");
+}
+
+//While Loop
+---------------------------
+int i = 0;
+while (i < 5) {
+  System.out.println(i);
+  i++;
+}
+
+//do While
+---------------------------
+int i = 0;
+do {
+  System.out.println(i);
+  i++;
+}
+while (i < 5);
+
+//For Loop
+--------------------------
+for (int i = 0; i < 5; i++) {
+  System.out.println(i);
+}
+
+String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+for (int i = 0; i < cars.length; i++) {
+  System.out.println(cars[i]);
+}
+
+
+//For Each Loop
+-----------------------------
+String[] cars = {"Volvo", "BMW", "Ford", "Mazda"};
+for (String i : cars) {
+  System.out.println(i);
+}
+
+//Break
+----------------------------
+for (int i = 0; i < 10; i++) {
+  if (i == 4) {
+    break;
+  }
+  System.out.println(i);
+}
+
+//Continue
+-----------------------------
+for (int i = 0; i < 10; i++) {
+  if (i == 4) {
+    continue;
+  }
+  System.out.println(i);
+}
+
+//Methods
+-----------------------------
+static void myMethod() {
+    // code to be executed
+  }
+static void myMethod(String fname) {
+    System.out.println(fname + " Refsnes");
+  }
+
+//Method Overloading : same method name but parameter different
+--------------------------------------
+static int plusMethodInt(int x, int y) {
+  return x + y;
+}
+
+static double plusMethodDouble(double x, double y) {
+  return x + y;
+}
+
+//OOP
+-------------------------------------------
+writing methods that perform operations on the data
+
+//Class
+----------------------------
+public class Main {
+  int x = 5;
+
+  public static void main(String[] args) {
+    Main myObj = new Main();
+    System.out.println(myObj.x);
+  }
+}
+
+//Constructor
+---------------------------
+public class Main {
+  int x;  // Create a class attribute
+
+  // constructor
+  public Main() {
+    x = 5;  
+  }
+
+  public static void main(String[] args) {
+    Main myObj = new Main(); // Create an object
+    System.out.println(myObj.x); // Print the value
+  }
+}
+
+//Modifier
+------------------------
+public
+private
+protected
+
+//Encapsulation
+------------------------
+public class Person {
+  private String name; // private = restricted access
+
+  // Getter
+  public String getName() {
+    return name;
+  }
+
+  // Setter
+  public void setName(String newName) {
+    this.name = newName;
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    Person myObj = new Person();
+    myObj.setName("John"); // Set the value
+    System.out.println(myObj.getName());
+  }
+}
+
+//Inheritance
+-------------------------------
+class Vehicle {
+  protected String brand = "Ford";        //attribute
+  public void honk() {                    // method
+    System.out.println("Tuut, tuut!");
+  }
+}
+
+class Car extends Vehicle {
+  private String modelName = "Mustang";    // attribute
+
+  public static void main(String[] args) {
+    // Create object
+    Car myCar = new Car();
+
+    // Call method
+    myCar.honk();
+
+    // Display the value
+    System.out.println(myCar.brand + " " + myCar.modelName);
+  }
+}
+
+
+//Polymorphism
+--------------------------
+class Animal {
+  public void animalSound() {
+    System.out.println("The animal makes a sound");
+  }
+}
+
+class Pig extends Animal {
+  public void animalSound() {
+    System.out.println("The pig says: wee wee");
+  }
+}
+
+class Dog extends Animal {
+  public void animalSound() {
+    System.out.println("The dog says: bow wow");
+  }
+}
+
+class Main {
+  public static void main(String[] args) {
+    Animal myAnimal = new Animal();  // Create a Animal object
+    Animal myPig = new Pig();  // Create a Pig object
+    Animal myDog = new Dog();  // Create a Dog object
+    myAnimal.animalSound();
+    myPig.animalSound();
+    myDog.animalSound();
+  }
+}
+
+//Inner Classes
+-----------------------------
+class OuterClass {
+  int x = 10;
+
+  class InnerClass {
+    int y = 5;
+  }
+}
+
+public class Main {
+  public static void main(String[] args) {
+    OuterClass myOuter = new OuterClass();
+    OuterClass.InnerClass myInner = myOuter.new InnerClass();
+    System.out.println(myInner.y + myOuter.x);
+  }
+}
+
+// Outputs: 15
+
+
+//Abstract Class
+-------------------------
+Abstract class: is a restricted class that cannot be used to create objects.
+Abstract method: can only be used in an abstract class, and it does not have a body. The body is provided by the subclass
+
+abstract class Animal {
+  // Abstract method
+  public abstract void animalSound();
+
+  //method
+  public void sleep() {
+    System.out.println("Zzz");
+  }
+}
+
+// Subclass
+class Pig extends Animal {
+  public void animalSound() {
+    System.out.println("The pig says: wee wee");
+  }
+}
+
+class Main {
+  public static void main(String[] args) {
+    Pig myPig = new Pig(); 
+    myPig.animalSound();
+    myPig.sleep();
+  }
+}
+
+
+//Interfaces
+---------------------------
+// Interface
+interface Animal {
+  public void animalSound(); // interface method (does not have a body)
+  public void sleep(); 
+}
+
+// Pig "implements" the Animal interface
+class Pig implements Animal {
+
+  public void animalSound() {
+    // The body of animalSound() is provided here
+    System.out.println("The pig says: wee wee");
+  }
+
+  public void sleep() {
+    // The body of sleep() is provided here
+    System.out.println("Zzz");
+  }
+}
+
+class Main {
+  public static void main(String[] args) {
+    Pig myPig = new Pig();  // Create a Pig object
+    myPig.animalSound();
+    myPig.sleep();
+  }
+}
+
+
+//Enums
+---------------------------
+public class Main {
+  enum Level {
+    LOW,
+    MEDIUM,
+    HIGH
+  }
+
+  public static void main(String[] args) {
+    Level myVar = Level.MEDIUM; 
+    System.out.println(myVar);
+  }
+}
+
+
+//User Input (Scanner)
+-------------------------------------
+import java.util.Scanner;  // Import the Scanner class
+
+class Main {
+  public static void main(String[] args) {
+    Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+    System.out.println("Enter username");
+
+    String userName = myObj.nextLine();  // Read user input
+    System.out.println("Username is: " + userName);  // Output user input
+  }
+}
+
+nextBoolean() 	Reads a boolean value from the user
+nextByte() 	Reads a byte value from the user
+nextDouble() 	Reads a double value from the user
+nextFloat() 	Reads a float value from the user
+nextInt() 		Reads a int value from the user
+nextLine() 	Reads a String value from the user
+nextLong() 	Reads a long value from the user
+nextShort()	Reads a short value from the user
+
+//Date and Time
+--------------------------
+import java.time.LocalDate; // import the LocalDate class
+
+public class Main {
+  public static void main(String[] args) {
+    LocalDate myObj = LocalDate.now(); 
+    System.out.println(myObj); // 2023-04-22
+  }
+}
+
+//ArrayList
+-------------------------
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    ArrayList<String> cars = new ArrayList<String>();
+    cars.add("Volvo");
+    cars.add("BMW");
+    cars.add("Ford");
+    cars.add("Mazda");
+    cars.set(0, "Opel");
+    System.out.println(cars.get(0));
+  }
+}
+
+//LinkedList
+--------------------------
+import java.util.LinkedList;
+
+public class Main {
+  public static void main(String[] args) {
+    LinkedList<String> cars = new LinkedList<String>();
+    cars.add("Volvo");
+    cars.add("BMW");
+    cars.add("Ford");
+    cars.add("Mazda");
+  }
+}
+
+
+//HashMap
+---------------------------
+import java.util.HashMap;
+
+public class Main {
+  public static void main(String[] args) {
+    // Create a HashMap object called capitalCities
+    HashMap<String, String> capitalCities = new HashMap<String, String>();
+
+    // Add keys and values
+    capitalCities.put("England", "London");
+    capitalCities.put("Germany", "Berlin");
+    capitalCities.put("Norway", "Oslo");
+    capitalCities.put("USA", "Washington DC");
+    System.out.println(capitalCities.get("England")); //London 
+  }
+}
+
+
+//HashSet
+----------------------------
+import java.util.HashSet;
+
+public class Main {
+  public static void main(String[] args) {
+    HashSet<String> cars = new HashSet<String>();
+    cars.add("Volvo");
+    cars.add("BMW");
+    cars.add("Ford");
+    cars.add("BMW");
+    cars.add("Mazda");
+    cars.remove("Volvo");
+    System.out.println(cars.contains("Mazda"));  //true
+  }
+}
+
+
+//Iterator
+-------------------------
+import java.util.ArrayList;
+import java.util.Iterator;
+
+public class Main {
+  public static void main(String[] args) {
+    ArrayList<Integer> numbers = new ArrayList<Integer>();
+    numbers.add(12);
+    numbers.add(8);
+    numbers.add(2);
+    numbers.add(23);
+    Iterator<Integer> it = numbers.iterator();
+    while(it.hasNext()) {
+      Integer i = it.next();
+      if(i < 10) {
+        it.remove();
+      }
+    }
+    System.out.println(numbers);
+  }
+}
+
+
+//Wrapper Classes
+--------------------------
+public class Main { 
+  public static void main(String[] args) { 
+    Integer myInt = 5; 
+    Double myDouble = 5.99; 
+    Character myChar = 'A'; 
+    System.out.println(myInt.intValue());  //5
+    System.out.println(myDouble.doubleValue()); //5.99
+    System.out.println(myChar.charValue());  //A
+  }
+}
+
+
+//Try...Catch
+--------------------------------
+public class Main {
+  public static void main(String[ ] args) {
+    try {
+      int[] myNumbers = {1, 2, 3};
+      System.out.println(myNumbers[10]);
+    } catch (Exception e) {
+      System.out.println("Something went wrong.");
+    }
+  }
+}
+
+
+//Regular Expression
+--------------------------------------
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Main {
+  public static void main(String[] args) {
+    Pattern pattern = Pattern.compile("w3schools", Pattern.CASE_INSENSITIVE);
+    Matcher matcher = pattern.matcher("Visit W3Schools!");
+    boolean matchFound = matcher.find();
+    if(matchFound) {
+      System.out.println("Match found");
+    } else {
+      System.out.println("Match not found");
+    }
+  }
+}
+// Outputs Match found
+
+
+//Threads
+----------------------------
+public class Main extends Thread {
+  public static int amount = 0;
+
+  public static void main(String[] args) {
+    Main thread = new Main();
+    thread.start();
+    System.out.println(amount);
+    amount++;
+    System.out.println(amount);
+  }
+
+  public void run() {
+    amount++;
+  }
+}
+
+//0
+//2
+
+
+//Lambda
+------------------------
+import java.util.ArrayList;
+
+public class Main {
+  public static void main(String[] args) {
+    ArrayList<Integer> numbers = new ArrayList<Integer>();
+    numbers.add(5);
+    numbers.add(9);
+    numbers.add(8);
+    numbers.add(1);
+    numbers.forEach( (n) -> { System.out.println(n); } );
+  }
+}
+
+
+//Read a File
+------------------------
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
+
+public class ReadFile {
+  public static void main(String[] args) {
+    try {
+      File myObj = new File("filename.txt");
+      Scanner myReader = new Scanner(myObj);
+      while (myReader.hasNextLine()) {
+        String data = myReader.nextLine();
+        System.out.println(data);
+      }
+      myReader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+  }
+}
+
+output will be: 
+	Files in Java might be tricky, but it is fun enough!
+
+
+import java.io.File;  // Import the File class
+
+public class GetFileInfo { 
+  public static void main(String[] args) {
+    File myObj = new File("filename.txt");
+    if (myObj.exists()) {
+      System.out.println("File name: " + myObj.getName());
+      System.out.println("Absolute path: " + myObj.getAbsolutePath());
+      System.out.println("Writeable: " + myObj.canWrite());
+      System.out.println("Readable " + myObj.canRead());
+      System.out.println("File size in bytes " + myObj.length());
+    } else {
+      System.out.println("The file does not exist.");
+    }
+  }
+}
+
+
+import java.io.File; 
+
+public class DeleteFolder {
+  public static void main(String[] args) { 
+    File myObj = new File("C:\\Users\\MyName\\Test"); 
+    if (myObj.delete()) { 
+      System.out.println("Deleted the folder: " + myObj.getName());
+    } else {
+      System.out.println("Failed to delete the folder.");
+    } 
+  } 
+}
+
