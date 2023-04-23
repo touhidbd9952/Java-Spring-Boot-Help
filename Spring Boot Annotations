@@ -1,0 +1,49 @@
+
+    ////////Basic Setup/////////////////
+
+        @SpringBootApplication
+
+        @Configuration
+
+        @ComponentScan
+
+        @EnableAutoConfiguration
+        
+    ////////Import Resource File/////////////////
+    
+        @ImportResource({"classpath:BeenConfig.xml"})
+
+    ////////Request Responses/////////////////
+
+        @GetMapping
+
+        @RequestMapping
+
+        @RequestParam
+
+    ////////Component Types/////////////////
+
+        @Component
+
+        @Service
+
+        @Repository
+
+        @Controller
+
+        @RestController
+
+    ////////Testing/////////////////
+
+        @SpringBootTest
+
+        @MockBean
+
+        @Validated
+
+    ////////Misc/////////////////
+
+        @Bean
+
+        @ConditionalOnJava
+
