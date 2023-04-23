@@ -1,0 +1,219 @@
+/////////////////////First Spring Boot App//////////////////////////////////////
+
+//Create Project By SprintStaterProject
+-------------------------------------
+    File --> New --> SprintStaterProject
+
+    Name: springStaterProject1  //yourProjectName
+    Group: com.abc1  //your domain name
+    Artifact: springStaterProject1 //yourProjectName
+    Version: 0.0.1
+    Description: about project
+    Package: com.abc1.main //project package name
+
+    Next --> Finish
+
+//Project Structure
+--------------------------------------
+yourProjectName
+|--src/main/java
+|	|---com.abc1.main
+|		|---SpringStarterProject2Application.java  (project stater)
+|--src/main/resources (configuration files)
+|--src/test/java (use for test project)
+|--JRE System Library
+|--Project and External Dependencies  (all dependencies javascript files)
+|--bin
+|--gradle
+|--src
+|--build.gradle
+|--gradlew
+|--gradlew.bat
+|--pom.xml (Dependencies configuration file)
+|--HELP.md
+|--settings.gradle
+
+
+//Create a new package  
+-----------------------------------
+in "src/main/java --> com.abc1.main" named "com.abc1.main.model"
+
+right click on "src/main/java" --> New --> Package
+    
+     Name: com.abc1.main.model  
+
+   click on "Finish"
+
+//Create a Class "Coder.java"
+----------------------------------------
+right click on "com.abc1.main.model" --> New --> Class
+
+    Name: Coder
+
+   click on "Finish"
+
+   in "Coder" class write below code
+    -------------------------------------------
+   package com.abc1.main.model;
+
+import jakarta.annotation.PreDestroy;
+
+public class Coder {
+	private int id;
+	private String name;
+	private String language;
+	private Computer computer;  //dependency
+
+                  //to create default constructor, right click here --> Source --> Generate Constructors From Super Class..
+	public Coder() {
+		super();
+		System.out.println("default constructor: Coder Class created");
+	}
+
+                  //to create default constructor, right click here --> Source --> Generate Constructors Using Fields...
+	public Coder(int id, String name, String language, Computer computer) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.language = language;
+		this.computer = computer;
+		System.out.println("all constructor: Coder Class created");
+	}
+	
+	//to create getter and setter of fields, right clck here --> Source --> Generate Getter and Setter...
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public Computer getComputer() {
+		return computer;
+	}
+
+	public void setComputer(Computer computer) {
+		this.computer = computer;
+	}
+	
+	@PreDestroy
+	private void destroy_contructor()
+	{
+		System.out.println("constructor destroy: Coder Class");
+	}
+	
+
+}
+
+
+//Create one new class "Computer"
+-----------------------------------------------------
+package com.abc1.main.model;
+
+import jakarta.annotation.PreDestroy;
+
+public class Computer {
+	private String brand;
+
+	public Computer() {
+		super();
+		System.out.println("default constructor: Computer Class created");
+	}
+
+	public Computer(String brand) {
+		super();
+		this.brand = brand;
+		System.out.println("all constructor: Computer Class created");
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	
+	@PreDestroy
+	private void destroy_contructor()
+	{
+		System.out.println("constructor destroy: Computer Class");
+	}
+
+}
+
+//create a config file "BeenConfig" xml file in "src/main/resources"
+----------------------------------------------------------------------------------------------------
+right click on "src/main/resources" --> New --> Other --> Wizards: Sprin , select "Spring Been Configuration File" --> Next --> File name: BeenConfig
+
+in BeenConfig.xml
+--------------------------
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	//add a bean for "Coder" class and pass data by property
+	<bean id="coder1" class="com.abc1.main.model.Coder">
+		<property name="id" value="001"></property>
+		<property name="name" value="Karim"></property>
+		<property name="language" value="c++"></property>
+		<property name="computer" ref="computer1"></property>
+	</bean>
+	
+                 //add a bean for "Computer" class and pass data by property
+	<bean id="computer1" class="com.abc1.main.model.Computer">
+		<property name="brand" value="Del"></property>
+	</bean>
+
+</beans>
+
+//in main class (src/main/java --> com.abc1.main --> SpringStaterProject2Application.java)
+------------------------------------------------------------------------------------------------------------------------
+package com.abc1.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ImportResource;
+
+import com.abc1.main.model.Coder;
+
+@SpringBootApplication
+@ImportResource({"classpath:BeenConfig.xml"})  //import file
+public class SpringStarterProject2Application {
+
+	public static void main(String[] args) {
+		ApplicationContext context =  SpringApplication.run(SpringStarterProject2Application.class, args);
+		
+		Coder coderObj = (Coder)context.getBean("coder1");  //use coder1 id to create Coder class Object
+		System.out.println(coderObj.getName()); //show coder name
+		System.out.println(coderObj.getComputer().getBrand()); //show computer brand
+	}
+
+}
+
+//Run Spring Project
+-----------------------------
+right click on "your project name" --> Run As --> Spring Boot App
+
+
+
