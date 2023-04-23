@@ -2,7 +2,7 @@
 
 //check java version
 --------------------------
-java -version
+java --version
 
 //install java
 --------------------------
