@@ -1,1 +1,3 @@
 ctrl + shift + f  // code formatting
+ctrl + 7  //comment, uncomment
+ctrl + shift + /  //blog comment
