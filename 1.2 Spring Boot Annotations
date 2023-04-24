@@ -9,9 +9,14 @@
 
         @EnableAutoConfiguration
         
-    ////////Import Resource File/////////////////
+    ////////Import Resource File//////////////////////////
     
         @ImportResource({"classpath:BeenConfig.xml"})
+   
+    ////////Import File (BeanConfig)//////////////////////////
+        import com.abc1.main.config.BeanConfig;
+        
+        @Import({BeanConfig.class})
     
     ////////Cal function on distroy construction///////////
         @PreDestroy
