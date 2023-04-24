@@ -1,0 +1,71 @@
+Step-1: create a package "Config"
+-------------------------------------
+right click on "src/main/java" --> New --> Package --> Name: com.abc1.main.config
+
+Step-2: create a class "BeanConfig" in "com.abc1.main.config" package
+-----------------------------------------------------------------------
+right click on "com.abc1.main.config" --> New --> Class -->name: BeanConfig
+
+in BeanConfig 
+--------------
+package com.abc1.main.config;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.abc1.main.model.Coder;
+import com.abc1.main.model.Computer;
+
+@Configuration
+public class BeanConfig {
+	@Bean
+	 public Coder coder1(@Qualifier("computer1") Computer computer)     //@Qualifier anotation is use to indicate specific class
+	 {
+		Coder coderObj = new Coder();
+		coderObj.setId(001);
+		coderObj.setName("Karim");
+		coderObj.setLanguage("Java");
+		coderObj.setComputer(computer1);
+		return coderObj;
+	 }
+	
+	@Bean
+	 public Computer computer1()
+	 {
+		Computer computerObj = new Computer();
+		computerObj.setBrand("Dell");
+		return computerObj;
+	 }
+}
+
+Step-3: use "BeanConfig" file in "main.class"
+-------------------------------------------------
+package com.abc1.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Import;
+
+
+import com.abc1.main.model.Coder;
+import com.abc1.main.config.BeanConfig;  //import BeanConfig file
+
+@SpringBootApplication
+@Import({BeanConfig.class})   //connect BeanConfig
+public class SpringStarterProject2Application {
+
+	public static void main(String[] args) {
+		ApplicationContext context =  SpringApplication.run(SpringStarterProject2Application.class, args);
+		
+		Coder coderObj = (Coder)context.getBean("coder1");
+		System.out.println(coderObj.getName());
+		System.out.println(coderObj.getComputer().getBrand());
+	}
+
+}
+
+Step-4: run project
+------------------------
+right click on project name --> Run As --> Spring Boot App
+
