@@ -1,0 +1,149 @@
+Step-1: create a class "Coder" with @Component //@Component anotation indicate this is a bean file
+        use @Autowired  //auto dependency data pass
+-------------------------------------
+package com.abc1.main.model;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PreDestroy;
+
+@Component
+public class Coder {
+	private int id;
+	private String name;
+	private String language;
+	@Autowired
+	private Computer computer;
+
+	public Coder() {
+		super();
+		System.out.println("default constructor: Coder Class created");
+	}
+
+	public Coder(int id, String name, String language, Computer computer) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.language = language;
+		this.computer = computer;
+		System.out.println("all constructor: Coder Class created");
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public Computer getComputer() {
+		return computer;
+	}
+
+	public void setComputer(Computer computer) {
+		this.computer = computer;
+	}
+	
+	@PreDestroy
+	private void destroy_contructor()
+	{
+		System.out.println("constructor destroy: Coder Class");
+	}
+}
+
+
+Step-2: create a class "Computer" with @Component //@Component anotation indicate this is a bean file
+-----------------------------------------------------------------------
+package com.abc1.main.model;
+
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PreDestroy;
+
+@Component
+public class Computer {
+	private String brand;
+
+	public Computer() {
+		super();
+		System.out.println("default constructor: Computer Class created");
+	}
+
+	public Computer(String brand) {
+		super();
+		this.brand = brand;
+		System.out.println("all constructor: Computer Class created");
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	
+	@PreDestroy
+	private void destroy_contructor()
+	{
+		System.out.println("constructor destroy: Computer Class");
+	}
+}
+
+
+
+
+
+Step-3: in "main.class"
+-------------------------------------------------
+package com.abc1.main;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+
+import com.abc1.main.model.Coder;
+import com.abc1.main.model.Computer;
+
+
+@SpringBootApplication
+public class SpringStarterProject2Application {
+
+	public static void main(String[] args) {
+		ApplicationContext context =  SpringApplication.run(SpringStarterProject2Application.class, args);
+		
+		Coder coderObj = context.getBean(Coder.class);
+		coderObj.setId(001);
+		coderObj.setName("Karim");
+		coderObj.setLanguage("Java");
+		coderObj.setComputer(new Computer("Dell"));
+		
+		System.out.println(coderObj.getName());
+		System.out.println(coderObj.getComputer().getBrand());
+	}
+
+}
+
+
+Step-4: run project
+------------------------
+right click on project name --> Run As --> Spring Boot App
