@@ -165,7 +165,7 @@ right click on "src/main/resources" --> New --> Other --> Wizards: Sprin , selec
 
 in BeenConfig.xml
 --------------------------
-//pass data/inject data by property
+//pass data/inject data by property  (know as "setter injection")
 
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -190,7 +190,7 @@ in BeenConfig.xml
 
 or 
 ------
-//pass data/inject data by constructor-arg
+//pass data/inject data by constructor-arg (know as "contructor argument injection")
 
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
