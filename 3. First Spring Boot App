@@ -159,12 +159,14 @@ public class Computer {
 
 }
 
-//create a config file "BeenConfig" xml file in "src/main/resources"
+//create a config file "BeenConfig" xml file in "src/main/resources"  
 ----------------------------------------------------------------------------------------------------
 right click on "src/main/resources" --> New --> Other --> Wizards: Sprin , select "Spring Been Configuration File" --> Next --> File name: BeenConfig
 
 in BeenConfig.xml
 --------------------------
+//pass data/inject data by property
+
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -185,6 +187,32 @@ in BeenConfig.xml
 	</bean>
 
 </beans>
+
+or 
+------
+//pass data/inject data by constructor-arg
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    
+	<bean id="coder1" class="com.abc1.main.model.Coder">
+		<constructor-arg index="0" value="001"></constructor-arg>
+		<constructor-arg index="1" value="Karim"></constructor-arg>
+		<constructor-arg index="2" value="Java"></constructor-arg>
+		<constructor-arg index="3" ref="computer1"></constructor-arg>
+	</bean>
+	
+	
+	<bean id="computer1" class="com.abc1.main.model.Computer">
+		<constructor-arg index="0" value="dell"></constructor-arg>
+	</bean>
+
+</beans>
+
 
 //in main class (src/main/java --> com.abc1.main --> SpringStaterProject2Application.java)
 ------------------------------------------------------------------------------------------------------------------------
