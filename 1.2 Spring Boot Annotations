@@ -56,3 +56,6 @@
 
         @ConditionalOnJava
 
+   /////////Object////////////////////
+   @Scope(value = "singleton")   //one time create object in a project, next time only use
+   @Scope(value = "prototype")   //when need to create multiple object of a class
