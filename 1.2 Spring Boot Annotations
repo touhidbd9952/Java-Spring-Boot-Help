@@ -52,6 +52,7 @@
     ////////Misc/////////////////
 
         @Bean
+        @Qualifier("computer1")  
 
         @ConditionalOnJava
 
