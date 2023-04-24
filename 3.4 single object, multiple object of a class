@@ -1,0 +1,86 @@
+//singleton : in java, by default support one time object create, next time only use. you can't create multiple object of same class.
+//prototype: if you need to create multiple object of a class, you need to use @Scope(value = "prototype") anotation
+
+singleton
+--------------------
+package com.abc1.main.model;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PreDestroy;
+
+@Component
+@Scope(value = "singleton")   //if you don't write "@Scope(value = "singleton")" before class, by default java written this
+public class Computer {
+	private String brand;
+
+	public Computer() {
+		super();
+		System.out.println("default constructor: Computer Class created");
+	}
+
+	public Computer(String brand) {
+		super();
+		this.brand = brand;
+		System.out.println("all constructor: Computer Class created");
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	
+	@PreDestroy
+	private void destroy_contructor()
+	{
+		System.out.println("constructor destroy: Computer Class");
+	}
+
+}
+
+
+////
+
+package com.abc1.main.model;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import jakarta.annotation.PreDestroy;
+
+@Component
+@Scope(value = "prototype")   //if you need to create multiple object of a class then, you have to write "@Scope(value = "prototype")" before class 
+public class Computer {
+	private String brand;
+
+	public Computer() {
+		super();
+		System.out.println("default constructor: Computer Class created");
+	}
+
+	public Computer(String brand) {
+		super();
+		this.brand = brand;
+		System.out.println("all constructor: Computer Class created");
+	}
+
+	public String getBrand() {
+		return brand;
+	}
+
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	
+	@PreDestroy
+	private void destroy_contructor()
+	{
+		System.out.println("constructor destroy: Computer Class");
+	}
+
+}
+
