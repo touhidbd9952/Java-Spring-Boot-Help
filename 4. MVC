@@ -1,0 +1,328 @@
+/////Spring MVC (Model View Controller) project //////////////////////
+1. Spring Starter Project
+2. Web Spring
+3. Thymeleaf (template) / html page
+
+Project Structure
+----------------------
+ProjectName
+|
+|--src/main/java
+|	|--com.abc1.main (package)
+|		|--SpringMvcApplication.java (main class)
+|		|--com.abc1.main.controller (package)
+|		|	|--MainControllere.java
+|		|--com.abc1.main.model (package)
+|
+|--src/main/resources
+|	|--static (folder)
+|	|     |--css (folder)
+|	|     |--js (folder)
+|	|     |--img (folder)
+|	|--templates (folder)
+|	|     |--fontend (folder)
+|	|     |	|--Home.html
+|	|     |	|--About.html
+|	|     |	|--Contact.html
+|	|     |--backend (folder)
+|	
+|--src/test/java
+|--JRE System Library
+|--Maven Dependencies
+|--src
+|--target
+|--HELP.md
+|--mvnw
+|--mvnw.cmd
+|--pom.xml
+
+
+//Create html page in template
+------------------------------------------
+go to "src/main/resources" right click on "templates" --> New --> Other (write: html) --> HTML File
+
+	File Name: Home.html
+
+in Home.html
+---------------------
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Home Page</title>
+</head>
+<body>
+     	<h1>Programmer's Data</h1>
+	
+	<form action="addProgrammer">
+		<h3>Enter ID</h3>
+		<input type="text" name="pid" />
+		<h3>Enter Name</h3>
+		<input type="text" name="pname" />
+		<h3>Enter Language</h3>
+		<input type="text" name="planguage" />
+		<button type="submit">Add Programmer</button>
+	</form>
+</body>
+</html>
+
+//add thymeleaf xmlns in html page 
+-----------------------------------------------
+1. open to browser and type "thymeleaf xmlns"
+2. copy xmlns code and paste in all html page like below
+
+	<html xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+
+//Create Controller
+-----------------------------------------
+1. go to "src/main/java" --> right click on "com.abc1.main" --> New --> Package --> Name: com.abc1.main.controller
+2. right click on "com.abc1.main.controller" --> New --> Class --> Name: MainController
+
+in MainController.java
+------------------------------
+package com.abc1.main.controller
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MainController{
+
+}
+
+//Create Function in Controller and Show "Home.html" page
+---------------------------------------------------------------------------------
+in MainController.java
+------------------------------
+package com.abc1.main.controller
+
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.abc1.main.model.Programmer;
+
+@Controller
+public class MainController
+{
+   @RequestMapping("/")
+   public String homePage()
+   {
+      return "fontend/home.html";
+   }
+   
+   @RequestMapping("/addProgrammer")
+   public String addProgrammer( @RequestParam int pid,  @RequestParam String pname, @RequestParam String planguage, Model model )
+   {
+     //to transfer data from one page to another page use "model"
+      model.addAttribute("pid", pid);
+      model.addAttribute("pname", pname);
+      model.addAttribute("planguage", planguage);
+
+      return "fontend/ViewProgrammerData.html";
+   }
+
+    or
+    
+     @RequestMapping("/addProgrammer")
+   public String addProgrammer( @RequestParam int pid,  @RequestParam String pname, @RequestParam String planguage, ModelMap model )
+   {
+     //to transfer data from one page to another page use "model"
+      model.addAttribute("pid", pid);
+      model.addAttribute("pname", pname);
+      model.addAttribute("planguage", planguage);
+
+      return "fontend/ViewProgrammerData.html";
+   }
+
+    or
+
+    @RequestMapping("/addProgrammer")
+   public String addProgrammer( @RequestParam(pid) int id,  @RequestParam(pname) String name, @RequestParam(planguage) String language, ModelMap model )
+   {
+     //to transfer data from one page to another page use "model"
+      model.addAttribute("pid", id);
+      model.addAttribute("pname", name);
+      model.addAttribute("planguage", language);
+
+      return "fontend/ViewProgrammerData.html";
+   }
+
+    or
+
+     @RequestMapping("/addProgrammer")
+   public ModelAndView addProgrammer( @RequestParam int pid,  @RequestParam String pname, @RequestParam String planguage )
+   {
+
+     ModelAndView  mv  = new ModelAndView();
+     mv.setViewName("fontend/ViewProgrammerData.html");
+     mv.addObject("pid", pid);
+     mv.addObject("pname", pname);
+     mv.addObject("planguage", planguage);
+     
+      return mv;
+   }
+
+   or 
+
+    @RequestMapping("/addProgrammer")
+   public ModelAndView addProgrammer( @ModelAttribute  Programmer programmerObj )
+   {
+
+     ModelAndView  mv  = new ModelAndView();
+     mv.setViewName("fontend/ViewProgrammerData.html");
+
+      return mv;
+   }
+
+}
+
+
+//show data from controller to page
+--------------------------------------------------
+in Home.html
+---------------------
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Programmer Info</title>
+</head>
+<body>
+     	<h1>Programmer Infor</h1>
+	
+	<table>
+	   <tr>
+	        <th>ID</th>
+	        <td th:text="${pid}"></td>
+	    </tr>
+	   <tr>
+	        <th>Name</th>
+	        <td th:text="${pname}"></td>
+	    </tr>
+	    <tr>
+	        <th>Language</th>
+	        <td th:text="${planguage}"></td>
+	    </tr>
+	</table>
+</body>
+</html>
+
+
+////////How to pass data by using Model Class/////////////////////
+1. go to "src/main/java" --> right click on "com.abc1.main" --> New --> Package --> Name: com.abc1.main.model
+2. right click on "com.abc1.main.model" --> New --> Class --> Name: Programmer
+
+in "Programmer.java"
+-------------------------------
+package com.abc1.main.model;
+
+import jakarta.annotation.PreDestroy;
+
+public class Programmer {
+	private int pid;
+	private String pname;
+	private String planguage;
+
+                  //to create default constructor, right click here --> Source --> Generate Constructors From Super Class..
+	public Programmer() {
+		super();
+	}
+
+                  //to create default constructor, right click here --> Source --> Generate Constructors Using Fields...
+	public Programmer(int pid, String pname, String planguage) {
+		super();
+		this.pid = pid;
+		this.pname = pname;
+		this.planguage = planguage;
+	}
+	
+	//to create getter and setter of fields, right clck here --> Source --> Generate Getter and Setter...
+	public int getPid() {
+		return pid;
+	}
+
+	public void setPid(int pid) {
+		this.pid = pid;
+	}
+
+	public String getPname() {
+		return pname;
+	}
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+	public String getPlanguage() {
+		return planguage;
+	}
+
+	public void setPlanguage(String language) {
+		this.planguage = planguage;
+	}
+
+                  @Override
+	public String toString(){
+	    return "Programmer [pid="+ pid + ", pname="+pname+", planguage="+planguage+"]";
+	}
+	
+}
+
+//in Controller
+--------------------
+@RequestMapping("/addProgrammer")
+   public ModelAndView addProgrammer( @ModelAttribute("p")  Programmer programmerObj )
+   {
+
+     ModelAndView  mv  = new ModelAndView();
+     mv.setViewName("fontend/ViewProgrammerData.html");
+
+      return mv;
+   }
+
+   or
+//we can avoid ModelAndView
+    @RequestMapping("/addProgrammer")
+   public String addProgrammer( @ModelAttribute("p")  Programmer programmerObj )
+   {
+      return "fontend/ViewProgrammerData.html";
+   }
+
+
+in Home.html
+---------------------
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Programmer Info</title>
+</head>
+<body>
+     	<h1>Programmer Infor</h1>
+	
+	<table>
+	   <tr>
+	        <th>ID</th>
+	        <td th:text="${p.pid}"></td>
+	    </tr>
+	   <tr>
+	        <th>Name</th>
+	        <td th:text="${p.pname}"></td>
+	    </tr>
+	    <tr>
+	        <th>Language</th>
+	        <td th:text="${p.planguage}"></td>
+	    </tr>
+	</table>
+</body>
+</html>
+
+
+
+
+
