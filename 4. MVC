@@ -112,6 +112,19 @@ public class MainController
    {
       return "fontend/home.html";
    }
+
+    @GetMapping("/allProgrammer")
+   public String allProgrammer(Model m)
+   {
+      List<Programmer> p = new ArrayList<Programmer>()
+      p.add(new Programmer(101, "Karim", "Java"));
+      p.add(new Programmer(102, "Rarim", "C#"));
+      p.add(new Programmer(103, "Monir", "Python"));
+
+      m.addAttribute("programmers", p);
+
+      return "fontend/home.html";
+   }
    
    @RequestMapping("/addProgrammer")
    public String addProgrammer( @RequestParam int pid,  @RequestParam String pname, @RequestParam String planguage, Model model )
@@ -152,7 +165,7 @@ public class MainController
 
     or
 
-     @RequestMapping("/addProgrammer")
+     @RequestMapping(value="/addProgrammer", method=RequestMethod.POST)
    public ModelAndView addProgrammer( @RequestParam int pid,  @RequestParam String pname, @RequestParam String planguage )
    {
 
@@ -167,7 +180,7 @@ public class MainController
 
    or 
 
-    @RequestMapping("/addProgrammer")
+    @PostMapping("/addProgrammer")
    public ModelAndView addProgrammer( @ModelAttribute  Programmer programmerObj )
    {
 
@@ -322,6 +335,143 @@ in Home.html
 </body>
 </html>
 
+
+/////////How to show a particular message or content in every page of a controller /////////////////////
+---------------------------------------------------------------------------------------------------------
+we need to use @ModelAttribute before particular function name like below
+
+
+in MainController.java
+------------------------------
+package com.abc1.main.controller
+
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.abc1.main.model.Programmer;
+
+@Controller
+public class MainController
+{
+  @ModelAttribute     <==== declare @ModelAttribute before function
+   public void welcome(Model m)
+  {
+      m.addAttribute("msg", "Welcome to Our Shop");
+   }
+
+
+   @RequestMapping("/")
+   public String homePage()
+   {
+      return "fontend/home.html";
+   }
+  
+    @RequestMapping("/about")
+   public String aboutPage()
+   {
+      return "fontend/about.html";
+   }
+   
+   @RequestMapping("/contact")
+   public String contactPage()
+   {
+      return "fontend/contact.html";
+   }
+   
+
+}
+
+
+in home.html, about.html, contact.html page  you can show message below way
+-------------------------------------------------------------------------------------------------
+
+<h2 th:text="${msg}"></h2>
+
+
+///////How to show particular message or content in every page of all controller//////////////
+------------------------------------------------------------------------------------------------------------------
+we need to use "@ControllerAdvice" before particular controller class where "@MedolAttribute" uses before function, like below 
+
+package com.abc1.main.controller
+
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import com.abc1.main.model.Programmer;
+
+@Controller
+@ControllerAdvice    <==== 1. use "@ControllerAdvice" annotation here 
+public class MainController
+{
+  @ModelAttribute     <==== 2. declare @ModelAttribute before function
+   public void welcome(Model m)
+  {
+      m.addAttribute("msg", "Welcome to Our Shop");
+   }
+
+
+   @RequestMapping("/")    
+   public String homePage()
+   {
+      return "fontend/home.html";
+   }
+  
+    @RequestMapping("/about")
+   public String aboutPage()
+   {
+      return "fontend/about.html";
+   }
+   
+   @RequestMapping("/contact")
+   public String contactPage()
+   {
+      return "fontend/contact.html";
+   }
+
+}
+
+in home.html, about.html, contact.html page  you can show message below way
+-------------------------------------------------------------------------------------------------
+
+<h2 th:text="${msg}"></h2>
+
+
+
+/////////Foreach loop/////////////////////////////////////////////////////////
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Programmer Info</title>
+</head>
+<body>
+     	<h1>Programmer Infor</h1>
+	
+	<table>
+                     <tr>
+	      <th>ID</th>
+	      <th>Name</th>
+	      <th>Language</th>
+	    </tr>
+	   <tr th:each="p : ${programmers}">
+	        <td th:text="${p.pid}"></td>
+	        <td th:text="${p.pname}"></td>
+	        <td th:text="${p.planguage}"></td>
+	    </tr>
+	   
+	</table>
+</body>
+</html>
 
 
 
