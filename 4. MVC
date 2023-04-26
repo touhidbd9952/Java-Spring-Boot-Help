@@ -123,7 +123,7 @@ public class MainController
 
       m.addAttribute("programmers", p);
 
-      return "fontend/home.html";
+      return "fontend/allprogrammer.html";
    }
    
    @RequestMapping("/addProgrammer")
@@ -446,7 +446,8 @@ in home.html, about.html, contact.html page  you can show message below way
 
 
 /////////Foreach loop/////////////////////////////////////////////////////////
-
+ in allprogrammer.html page
+ 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
                    xmlns:th="http://www.thymeleaf.org">
