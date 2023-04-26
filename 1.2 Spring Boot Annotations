@@ -23,11 +23,12 @@
 
     ////////Request Responses/////////////////
 
-        @GetMapping
+        @GetMapping   //use for get data or view page,  @GetMapping("/home")
+        @PostMapping  //use for post data to server, @PostMapping("/addProgrammer")
 
-        @RequestMapping
+        @RequestMapping     //for GET and POST data,  @RequestMapping("/addProgrammer")
 
-        @RequestParam
+        @RequestParam    //use for indicating parameter, public String addProgrammer( @RequestParam(pid) int id,  @RequestParam(pname) String name, @RequestParam(planguage) String language, ModelMap model )
 
     ////////Component Types/////////////////
 
@@ -38,6 +39,8 @@
         @Repository
 
         @Controller
+        
+        @ControllerAdvice   
 
         @RestController
 
@@ -59,3 +62,8 @@
    /////////Object////////////////////
    @Scope(value = "singleton")   //one time create object in a project, next time only use
    @Scope(value = "prototype")   //when need to create multiple object of a class
+   
+   ////////passing data to all page///////////////////
+   @ControllerAdvice   
+   @ModelAttribute
+   
