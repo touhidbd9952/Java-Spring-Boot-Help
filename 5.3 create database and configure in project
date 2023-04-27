@@ -1,0 +1,22 @@
+////Create a Database in MySQL WorkBench///////////////////////
+open MySQL WorkBench, create a database
+
+	create database my_db;      //select the line and click on execute button
+
+////Database configuration/////////////////////////////////////////////////////
+go to Java Spring Boot Project 
+--> go to "src/main/resources"
+--> open "Application_Properties"
+
+write "port" and press ctrl + space, computer will show some option
+--> select "server.port"
+
+server.port=8080   //default port, you can change it 8081 or you can use other port
+spring.datasource.url=jdbd:mysql://localhost:3306/my_db
+spring.datasource.username=root
+spring.datasource.password=root
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+spring.jpa.show-sql=true      // to show query that executed
+spring.jpa.hibernate.ddl-auto=update      // to use last updated database, if you want ever time java delete all database table data then write "create" insteed of "update"
+
+save "Application_Properties" file and run spring boot application to check everthing is ok or not
