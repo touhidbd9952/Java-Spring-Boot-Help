@@ -1,0 +1,21 @@
+To wok with MySQL, wee need some dependency.
+
+1. MySQL connector: 
+
+Go to "mvnrepository.com" in search bar : write "mysql connector" 
+--> click on "MySQL Connector/J"
+--> select latest version "8.0.23"
+--> in maven, copy the dependency code
+--> open "porm.xml" of your java project and paste the dependency code in 
+      dependencies
+--> remove version, from dependency code
+
+2. Spring Data JPA:
+
+Go to "mvnrepository.com" in search bar: write "spring data jpa"
+--> click on "Spring Boot Stater Data JPA"
+--> select latest version ""
+--> in maven, copy the dependency code
+--> open "porm.xml" of your java project and paste the dependency code in 
+     dependencies
+--> remove version, from dependency code
