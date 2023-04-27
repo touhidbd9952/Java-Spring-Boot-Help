@@ -1,0 +1,44 @@
+//////Database///////
+Spring Data JPA: is a module that use for database management. it work as ORM service provider. By default it comes with Hibernate.
+Spring ORM(Object Relational Model) Theory : by this we can create a relation map between object and databae.
+Hibernate: is a most popular ORM tool for Java Application. Another ORM tools (Eclips link, Ibatics) that can be use.
+
+Requirement
+-------------------
+Mysql Work banch: to create database and to check table by using query. For Mysql Work banch installation, we need to download MySQL and Install.
+
+Step: Mysql Download and Installation Process
+
+a. open browser and type "mysql download"
+b. select "MYSQL Downloads - MySQL"
+c. click on "MySQL Community(GPL) Download"
+d. click on "MySQL Installer for Windows"
+e. click on "Windows (x86, 32 bit) MSI installer  8.0.23 2.4M " Download
+f. clicl on "No thanks just start my download"
+g. double click on installation file 
+
+	Choosing a Setup Type: Custom --> Next
+	Select Project: 
+		1. MySQL Servers --> MySQL Server --> MySQL Server 8.0 (select latest version) --> MySQL Server 8.0.23 x64 (select top latest version)
+		2. Applications --> MySQL Workbench --> MySQL Workbench 8.0 (select latest veresion) --> MySQL Workbench 8.0.23 -x64
+		3. MySQL Connectors --> Connectors/J --> Connector/J 8.0 (select latest version) --> Connector/J 8.0.23 x86
+	Next --> Execute --> Next --> Execute --> Next --> Finish
+
+h. configuration: 
+	from windows search bar, type "MySQL Installer Community" 
+	--> MySQL Installer Community 
+	--> click on "reconfigure" of MySQL Server 
+	--> Type and Networking : Next 
+	--> Authentication Method: Next 
+	--> Accounts andRoles: Current Root Passwor: type "root" 
+	--> click on "check" 
+	--> Next 
+	--> Windows Service: Start the MySqL Server at System Startup (select it) 
+	--> Next 
+	--> Apply Configuration: Execute 
+	--> Finish
+
+i. Open "MySQL Workbench"
+	click on "Local instance MySQL 8.0" --> Passwork : type "root" --> Ok
+
+
