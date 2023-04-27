@@ -1,3 +1,5 @@
 ctrl + shift + f  // code formatting
 ctrl + 7  //comment, uncomment
 ctrl + shift + /  //blog comment
+ctrl + mouse click on link //to see a file (class, interface) inner code
+ctrl + space // to see helping option
