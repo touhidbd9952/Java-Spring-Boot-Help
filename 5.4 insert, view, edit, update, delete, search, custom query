@@ -1,0 +1,247 @@
+///insert, view, edit, update, delete, search, custom query///////////////////
+
+Step-1: we will create a package in "src/main/java" 
+--> "com.abc1.main"
+--> New
+--> Package
+    Name: com.abc1.main.repository
+--> Finish
+
+Step-2: create "interface" in "com.abc1.main.repository" package
+
+right click on "com.abc1.main.repository"
+--> New
+--> Interface
+   Name: ProgrammerRepo
+--> Finish
+
+in "ProgrammerRepo" 
+------------------------------
+package com.abc1.main.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import com.abc1.main.model.Coder;
+
+@Repository  //to indicate this is a repository
+public interface ProgrammerRepo extends JpaRepository<Coder, Integer>   
+{
+     List<Coder> findByname(String name);
+}
+
+
+Step-3: Create a Class "Coder.java" as model
+----------------------------------------
+create a package, so right click on "src/main/java" 
+--> New 
+--> Package
+ Name: com.abc1.main.model
+
+right click on "com.abc1.main.model" 
+--> New
+ --> Class
+   Name: Coder
+--> click on "Finish"
+
+   in "Coder" class write below code
+    -------------------------------------------
+   package com.abc1.main.model;
+
+import jakarta.annotation.PreDestroy;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Column;
+
+@Entity   //in dicate "Coder" is a table name
+public class Coder {
+	@Id  //indicate this id  is a primary key of coder table
+	@GeneratedValue(strategy = GenerationType.IDENTITY)  //id auto-increment
+	private int id;
+	@Column(name = "coder_name")    //change name --> coder_name
+	private String name;
+	private String language;
+
+                  //to create default constructor, right click here --> Source --> Generate Constructors From Super Class..
+	public Coder() {
+		super();
+	}
+
+                  //to create default constructor, right click here --> Source --> Generate Constructors Using Fields...
+	public Coder(int id, String name, String language{
+		super();
+		this.id = id;
+		this.name = name;
+		this.language = language;
+	}
+	
+	//to create getter and setter of fields, right clck here --> Source --> Generate Getter and Setter...
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	
+}
+
+
+Step-4: add "@Autowired" in MainController and create a instance of "CoderRepo"
+
+public class MainController {
+
+    @Autowired
+    CoderRepo coderInterface;
+
+     @GetMapping("/home")
+     public String home()
+     {
+        return "fontend/home.html";
+     }
+
+     @PostMapping("/add_coder")
+     public String  add_coder ( @ModelAttribute Coder coderObj )
+     {
+         coderInterface.save(coderObj);
+         return "redirect:/home";
+      }
+
+      @GetMapping("/view_coders")
+      public String view_coders()
+      {
+          coderInterface.deleteById(id);
+          return "fontend/view_coders.html";
+      }
+
+      @GetMapping("/edit_coder")
+      public String edit_coder(@RequestParam int id, Model m)
+      {
+         Coder coderObj = coderInterface.getOne(id);    //getOne is a Query DSL, by using it we can get data by id
+          m.addAttribute("coderinfo", coderObj);
+          return "fontend/edit_coder.html";
+      }
+
+       @PostMapping("/update_coder")
+     public String  update_coder ( @ModelAttribute Coder coderObj )
+     {
+            Coder c = coderInterface.getOne(coderObj.getId());   //getOne is a Query DSL, by using it we can get data by id
+
+            c.setName(coderObj.getName());
+            c.setLanguage(coderObj.getLanguage());
+
+            coderInterface.save(c);
+
+             return "redirect:/home";
+      }
+     
+      @GetMapping("/delete_coder")
+      public String delete_coder(@RequestParam int id)
+      {
+         coderInterface.deleteById(id);    //deleteById() is a Query DSL, by using it we can delete data by id
+          return "fontend/view_coders.html";
+      }
+
+      @PostMapping("/findByName")
+      public String findByName ( @RequestParam String name, Model m )
+      {
+         //custom query. findByName() is a new custom our created method that we need to add in coderInterface
+         List<Coder> coderlist = coderInterface.findByname(name);     //1. "findBy" keyword, 2. name: Coder class propertity name, 3. name: parameter. now we need to create  "findByname(name)" in "coderInterface"
+			                      -------- -------  -------
+				        1         2        3
+          m.addAttribute("codersinfo", coderlist);
+          return "fontend/view_coder_list.html";
+      }
+}
+
+Step-5: in "coder_entry_form.html" page
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Coder Entry Form</title>
+</head>
+<body>
+     	<h1>Coder Entry Form</h1>
+	
+	<form action="add_coder" method="POST">
+		<h3>Enter Name</h3>
+		<input type="text" name="name" />
+		<h3>Enter Language</h3>
+		<input type="text" name="language" />
+		<button type="submit">Add Programmer</button>
+	</form>
+</body>
+</html>
+
+Step-6: in "edit_coder.html" page
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Coder Entry Form</title>
+</head>
+<body>
+     	<h1>Coder Entry Form</h1>
+	
+	<form action="add_coder" method="POST">
+		<h3>Enter Name</h3>
+		<input type="text" name="name" value="${coderinfo.coder_name}" />
+		<h3>Enter Language</h3>
+		<input type="text" name="language" value="${coderinfo.language} />
+		<button type="submit">Add Programmer</button>
+	</form>
+</body>
+</html>
+
+Step-6: in "view_coder_list.html" page
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+                   xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Coder Entry Form</title>
+</head>
+<body>
+     	<h1>Coder Information</h1>
+	
+	<table>
+                     <tr>
+	      <th>ID</th>
+	      <th>Name</th>
+	      <th>Language</th>
+	    </tr>
+	   <tr th:each="d : ${codersinfo}">
+	        <td th:text="${d.id}"></td>
+	        <td th:text="${d.name}"></td>
+	        <td th:text="${d.language}"></td>
+	    </tr>
+	   
+	</table>
+</body>
+</html>
+
+
+
